@@ -14,6 +14,6 @@ actions:
       message: >-
         Hi {{ trigger.event.data.payload.text.split(":")[0]|replace("%","") }}!
         Test bericht ontvangen, het is nu {{ now().strftime('%H:%M:%S') }} |
-        SNR: {{trigger.event.data.payload.SNR}}
+        Hops: {{trigger.event.data.payload.path_len}}
       channel_idx: 0
 mode: single
