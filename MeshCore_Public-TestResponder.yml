@@ -1,0 +1,19 @@
+alias: "MeshCore: Test Responder Public channel"
+description: MeshCore Test Responder
+triggers:
+  - event_type: meshcore_raw_event
+    event_data:
+      event_type: EventType.CHANNEL_MSG_RECV
+    trigger: event
+conditions:
+  - condition: template
+    value_template: "{{ \"test\" in trigger.event.data.payload.text }}"
+actions:
+  - action: meshcore.send_channel_message
+    data:
+      message: >-
+        Hi {{ trigger.event.data.payload.text.split(":")[0]|replace("%","") }}!
+        Test bericht ontvangen, het is nu {{ now().strftime('%H:%M:%S') }} |
+        SNR: {{trigger.event.data.payload.SNR}}
+      channel_idx: 0
+mode: single
